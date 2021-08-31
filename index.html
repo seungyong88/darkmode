@@ -4,11 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
   <title>Document</title>
 </head>
 <body>
-  <div>
-    sdsd
+  <input class="check" type="checkbox" />
+  <div class="themed">
+    Theme
   </div>
+
+  <script>
+    const $checkbox = document.querySelector('.check');
+
+    const isUserColorTheme = localStorage.getItem('color-theme');
+    // const isOsColorTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    const getUserTheme = () => (isUserColorTheme ? isUserColorTheme : isOsColorTheme);
+
+    window.onload = function () {
+      if (isUserColorTheme === 'dark') {
+        localStorage.setItem('color-theme', 'dark');
+        document.documentElement.setAttribute('color-theme', 'dark');
+        $checkbox.setAttribute('checked', true);
+      } else {
+        localStorage.setItem('color-theme', 'light');
+        document.documentElement.setAttribute('color-theme', 'light');
+      }
+    };
+
+    $checkbox.addEventListener('click', e => {
+      if (e.target.checked) {
+        localStorage.setItem('color-theme', 'dark');
+        document.documentElement.setAttribute('color-theme', 'dark');
+      } else {
+        localStorage.setItem('color-theme', 'light');
+        document.documentElement.setAttribute('color-theme', 'light');
+      }
+    });
+  </script>
+
 </body>
 </html>
